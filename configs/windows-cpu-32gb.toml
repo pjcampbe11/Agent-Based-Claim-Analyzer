@@ -1,0 +1,91 @@
+# abCA config for a Windows laptop with 32 GB RAM and no usable GPU.
+#
+# Same shape as configs/windows-cpu-16gb.toml, one size up in every slot that
+# benefits from it. Read that file's header first; everything there applies.
+#
+# HOW BIG IT IS
+# =============
+#     qwen2.5:14b-instruct-q4_K_M    ~9.0 GB   adjudicator
+#     qwen2.5:7b-instruct-q4_K_M     ~4.7 GB   classifier + segmenter
+#     llama3.1:8b-instruct-q4_K_M    ~4.9 GB   red team + back-translation
+#     nomic-embed-text:v1.5          ~0.3 GB   embedder
+#                                    -------
+#                                    ~19 GB    plus context, call it 21-22 GB peak
+#
+# That leaves ~10 GB for Windows and whatever else is open. If you run a
+# browser with fifty tabs beside it, drop the adjudicator to
+# qwen2.5:7b-instruct-q4_K_M and you are back at the 16 GB profile's footprint.
+#
+# HOW FAST IT IS
+# ==============
+# The 14B adjudicator on CPU runs at roughly 3-6 tokens/s on an 8-core laptop.
+# That is fine for a single statement (a few minutes) and painful for a long
+# thread. The `standard` profile is on because the extra retrieval and the
+# red-team pass are what make the verdicts worth the wait; switch to `fast`
+# per run with `abca analyze --profile fast` when you only want a quick read.
+#
+# WHAT IT IS GOOD FOR
+# ===================
+# A 14B q4 adjudicator is a credible local model for this task -- not a 32B or
+# 70B, and the run record says which one it was, but its verdicts on statute
+# and regulation text hold up well enough to publish with the hash and let
+# somebody else re-run them on something bigger.
+
+[defaults]
+profile       = "standard"
+seed          = 42
+temperature   = 0.0
+max_claims    = 120
+reading_level = 8
+max_attempts  = 3
+red_team      = true         # the second-opinion pass; `--no-red-team` skips it for one run
+
+[models.classifier]
+provider   = "ollama"
+model      = "qwen2.5:7b-instruct-q4_K_M"
+keep_alive = "10m"
+timeout    = 600
+
+[models.segmenter]
+provider   = "ollama"
+model      = "qwen2.5:7b-instruct-q4_K_M"
+keep_alive = "10m"
+timeout    = 600
+
+[models.adjudicator]
+provider   = "ollama"
+model      = "qwen2.5:14b-instruct-q4_K_M"
+keep_alive = "5m"
+timeout    = 1800
+
+# Independent family from the adjudicator -- see the 16 GB file for why this
+# is enforced rather than advised.
+[models.redteam]
+provider   = "ollama"
+model      = "llama3.1:8b-instruct-q4_K_M"
+keep_alive = "10m"
+timeout    = 900
+
+[models.backtranslate]
+provider   = "ollama"
+model      = "llama3.1:8b-instruct-q4_K_M"
+keep_alive = "10m"
+timeout    = 900
+
+[models.embedder]
+provider   = "ollama"
+model      = "nomic-embed-text:v1.5"
+keep_alive = "10m"
+
+# ------------------------------------------------------------------ consensus
+# With 32 GB you can afford a two-model panel for a claim that matters.
+# `abca analyze --consensus` runs both and reports where they disagree instead
+# of averaging. Uncomment to enable; both are already pulled by the installer.
+#
+# [[models.consensus]]
+# provider = "ollama"
+# model    = "qwen2.5:14b-instruct-q4_K_M"
+#
+# [[models.consensus]]
+# provider = "ollama"
+# model    = "llama3.1:8b-instruct-q4_K_M"

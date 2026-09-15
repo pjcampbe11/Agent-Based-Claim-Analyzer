@@ -1,0 +1,99 @@
+# abCA config for a Windows laptop with 16 GB RAM and no usable GPU.
+#
+# WHAT THIS IS
+# ============
+# The smallest set of open-weight models that run the whole pipeline on CPU
+# and stay inside 16 GB with Windows, a browser and the GUI also open. Every
+# model here is served by Ollama (https://ollama.com), which on Windows runs
+# as a background service and uses the CPU automatically when there is no
+# supported GPU. Nothing leaves the machine.
+#
+# HOW BIG IT IS
+# =============
+# Ollama loads a model into RAM the first time a role uses it and keeps it
+# there for `keep_alive`. Worst case every model below is resident at once:
+#
+#     qwen2.5:7b-instruct-q4_K_M     ~4.7 GB   adjudicator
+#     qwen2.5:3b-instruct            ~2.0 GB   classifier + segmenter (same weights, loaded once)
+#     llama3.2:3b-instruct-q4_K_M    ~2.0 GB   red team + back-translation (same weights, loaded once)
+#     nomic-embed-text:v1.5          ~0.3 GB   embedder
+#                                    -------
+#                                    ~9 GB     plus context buffers, call it 10-11 GB peak
+#
+# `keep_alive` is short on purpose so the adjudicator is evicted a few minutes
+# after it finishes and the laptop gets its memory back between runs. If you
+# still see paging, set the environment variable OLLAMA_MAX_LOADED_MODELS=1
+# before starting Ollama (see docs/23-windows-cpu-setup.md) -- Ollama will then
+# swap models in and out per stage instead of holding them all.
+#
+# HOW FAST IT IS
+# ==============
+# Slow. On a recent 8-core laptop CPU expect roughly 8-15 tokens/s from the
+# 7B adjudicator and 20-30 tokens/s from the 3B models. A one-paragraph
+# statement with the `fast` profile takes about a minute; a long thread can
+# take ten. Timeouts below are raised from the 300 s default so a slow
+# adjudication does not get killed and reported as a model failure.
+#
+# WHAT IT IS GOOD FOR
+# ===================
+# Real runs, real ledger, real verification -- everything the tool does is
+# exercised here. What a 7B model is NOT is a strong adjudicator: it will miss
+# nuance a 32B model catches, and every run record carries the model tags so a
+# reader can see exactly which weights produced a verdict. If a verdict matters,
+# re-run it on a bigger model (configs/windows-cpu-32gb.toml, or a GPU box, or
+# the EC2 tunnel in docs/04-linux-ec2.md) and let `abca verify` show the diff.
+
+[defaults]
+profile       = "fast"       # one model per stage, cache-first retrieval. `standard` also works, just slower.
+seed          = 42
+temperature   = 0.0
+max_claims    = 60           # a thread of 200 claims on CPU is a lunch break; cap it
+reading_level = 8
+max_attempts  = 3
+red_team      = true         # the second-opinion pass; `--no-red-team` skips it for one run
+
+# ---------------------------------------------------------------- roles
+# Tags are pinned to an exact quantisation, never a floating `:latest`, so a
+# run today and a run next month are comparable and the ledger's weight hash
+# means something.
+
+[models.classifier]
+provider   = "ollama"
+model      = "qwen2.5:3b-instruct"
+keep_alive = "10m"
+timeout    = 600
+
+[models.segmenter]
+provider   = "ollama"
+model      = "qwen2.5:3b-instruct"
+keep_alive = "10m"
+timeout    = 600
+
+# The adjudicator does the real work and gets the biggest model that fits.
+# q4_K_M is the standard 4-bit quant: about a third the size of the full
+# weights with very little measurable loss at this scale.
+[models.adjudicator]
+provider   = "ollama"
+model      = "qwen2.5:7b-instruct-q4_K_M"
+keep_alive = "5m"
+timeout    = 900
+
+# Different model FAMILY from the adjudicator, not just a different size.
+# A model reviewing its own reasoning is the one least able to see where it
+# reached; the config loader refuses `backtranslate` == `adjudicator` outright.
+[models.redteam]
+provider   = "ollama"
+model      = "llama3.2:3b-instruct-q4_K_M"
+keep_alive = "10m"
+timeout    = 600
+
+[models.backtranslate]
+provider   = "ollama"
+model      = "llama3.2:3b-instruct-q4_K_M"
+keep_alive = "10m"
+timeout    = 600
+
+[models.embedder]
+provider   = "ollama"
+model      = "nomic-embed-text:v1.5"
+keep_alive = "10m"

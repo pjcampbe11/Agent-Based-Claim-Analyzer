@@ -1,0 +1,68 @@
+# abCA "lite": one model, CPU only, verification passes OFF.
+#
+# WHAT THIS IS
+# ============
+# The simplest way to run abCA on a laptop. ONE chat model fills every role
+# (classifier, segmenter, adjudicator -- the missing roles fall back to it
+# automatically) plus a small embedding model for clustering. The two
+# verification passes that cost extra model calls are switched off:
+#
+#   red team        -- the second adversarial pass over every verdict.
+#                      `red_team = false` below. One flag turns it back on
+#                      for a single run: `abca analyze --red-team ...`
+#   fidelity gate   -- the back-translation check that `abca explain` uses.
+#                      No [models.backtranslate] section, so `explain` reports
+#                      "no model configured for role 'backtranslate'". Add one
+#                      (a DIFFERENT model from the adjudicator) if you want it.
+#
+# Everything else still happens: sentence splitting, claim extraction and
+# classification, statute / CFR / Federal Register retrieval, adjudication
+# against the fetched text, clustering, the run ledger with hashes, and
+# `abca verify`. What you lose is the second opinion on each verdict, and the
+# run record says so on every run (a `RED TEAM SKIPPED` note, and
+# `red_team: false` in the config block).
+#
+# HOW BIG / HOW FAST
+# ==================
+#     qwen2.5:7b-instruct-q4_K_M     ~4.7 GB   everything
+#     nomic-embed-text:v1.5          ~0.3 GB   embedder
+#                                    -------
+#                                    ~5 GB     peak, fits beside a browser on 16 GB
+#
+# One paragraph with the `fast` profile: about 30-60 s on an 8-core laptop CPU.
+# Roughly half the wall clock of the 16 GB config, because there is no red team
+# pass and only one model ever has to be loaded.
+#
+# If even that is too slow, swap the model line for "qwen2.5:3b-instruct" --
+# ~2 GB, roughly twice as fast, noticeably weaker at adjudication. Do not go
+# below 3B; smaller models cannot reliably produce the structured output the
+# pipeline requires.
+
+[defaults]
+profile       = "fast"
+seed          = 42
+temperature   = 0.0
+max_claims    = 60
+reading_level = 8
+max_attempts  = 3
+red_team      = false        # the optional pass; `--red-team` on the command line overrides
+
+# One model. `segmenter` falls back to `classifier`, `redteam` (if ever turned
+# on) falls back to `adjudicator`; both fallbacks are recorded in the ledger
+# under the role they actually filled.
+[models.classifier]
+provider   = "ollama"
+model      = "qwen2.5:7b-instruct-q4_K_M"
+keep_alive = "10m"
+timeout    = 900
+
+[models.adjudicator]
+provider   = "ollama"
+model      = "qwen2.5:7b-instruct-q4_K_M"
+keep_alive = "10m"
+timeout    = 900
+
+[models.embedder]
+provider   = "ollama"
+model      = "nomic-embed-text:v1.5"
+keep_alive = "10m"
