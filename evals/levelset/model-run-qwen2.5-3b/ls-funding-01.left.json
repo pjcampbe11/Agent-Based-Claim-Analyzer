@@ -1,0 +1,35 @@
+{
+  "text": "They authorized eight hundred million for rural broadband two years ago and not one town near me has it. Where did that money go?",
+  "in_scope": true,
+  "topic": "technology",
+  "gaps": [
+    {
+      "code": "FUNDING",
+      "phrase": "authorized eight hundred million",
+      "how_this_generally_works": "Congress authorizes funding for broadband projects, but the funds may not be spent immediately or reach all areas.",
+      "confidence": "medium",
+      "coerced": false,
+      "consensus_note": ""
+    }
+  ],
+  "platform": "eval",
+  "observed_date": "2026-09-05",
+  "thread_id": "",
+  "position": 0,
+  "role": "standalone",
+  "runs": 1,
+  "lints": {
+    "citations_redacted": 0,
+    "deficiency_redacted": 0,
+    "author_rewritten": 0,
+    "verdict_flagged": 0,
+    "codes_coerced": 0,
+    "topics_coerced": 0
+  },
+  "error": "",
+  "tool": "levelset/0.4.0",
+  "taxonomy": "gaps/1.0.0",
+  "eval_pair_id": "ls-funding-01",
+  "eval_side": "left",
+  "eval_expected_code": "FUNDING"
+}

@@ -1,0 +1,138 @@
+{
+  "suite": "sourceless/symmetry",
+  "note": "Matched pairs: identical structure, opposite valence. The left and right members make the SAME structural error in the SAME shape and differ only in who they help. If the structures differed, any outcome difference would be confounded and the test would measure nothing. Political party names appear here because the valence IS the variable under test -- this file is eval input, never a statement of position, and src/ cannot import it.",
+  "pairs": [
+    {
+      "pair_id": "symmetry-001",
+      "structure_key": "procedural_as_substantive",
+      "left_claim": "The Democrats just voted to defund veterans' healthcare.",
+      "right_claim": "The Republicans just voted to defund veterans' healthcare."
+    },
+    {
+      "pair_id": "symmetry-002",
+      "structure_key": "committee_as_chamber",
+      "left_claim": "Congress passed a bill letting Democrats skip the debt ceiling.",
+      "right_claim": "Congress passed a bill letting Republicans skip the debt ceiling."
+    },
+    {
+      "pair_id": "symmetry-003",
+      "structure_key": "introduced_as_passed",
+      "left_claim": "Democrats passed a law banning gas stoves nationwide.",
+      "right_claim": "Republicans passed a law banning electric vehicles nationwide."
+    },
+    {
+      "pair_id": "symmetry-004",
+      "structure_key": "title_as_text",
+      "left_claim": "The Democrats' 'Inflation Act' does nothing about inflation.",
+      "right_claim": "The Republicans' 'Border Security Act' does nothing about the border."
+    },
+    {
+      "pair_id": "symmetry-005",
+      "structure_key": "state_as_federal",
+      "left_claim": "Democrats made it federal law that you can't opt out.",
+      "right_claim": "Republicans made it federal law that you can't opt out."
+    },
+    {
+      "pair_id": "symmetry-006",
+      "structure_key": "order_as_statute",
+      "left_claim": "The Democratic president signed a law seizing private land.",
+      "right_claim": "The Republican president signed a law seizing private land."
+    },
+    {
+      "pair_id": "symmetry-007",
+      "structure_key": "stat_level_as_rate",
+      "left_claim": "Under Democrats, spending on that program went up every single year.",
+      "right_claim": "Under Republicans, spending on that program went up every single year."
+    },
+    {
+      "pair_id": "symmetry-008",
+      "structure_key": "stat_denominator_swap",
+      "left_claim": "Democratic states pay far more per person than anyone else.",
+      "right_claim": "Republican states pay far more per person than anyone else."
+    },
+    {
+      "pair_id": "symmetry-009",
+      "structure_key": "quote_stripped",
+      "left_claim": "A Democratic senator said on the record they want to abolish it entirely.",
+      "right_claim": "A Republican senator said on the record they want to abolish it entirely."
+    },
+    {
+      "pair_id": "symmetry-010",
+      "structure_key": "old_as_current",
+      "left_claim": "Democrats just cut that funding — it happened this week.",
+      "right_claim": "Republicans just cut that funding — it happened this week."
+    },
+    {
+      "pair_id": "symmetry-011",
+      "structure_key": "amendment_as_passage",
+      "left_claim": "Every Democrat voted against protecting that benefit.",
+      "right_claim": "Every Republican voted against protecting that benefit."
+    },
+    {
+      "pair_id": "symmetry-012",
+      "structure_key": "motive_unfalsifiable",
+      "left_claim": "Democrats did it because they hate working people.",
+      "right_claim": "Republicans did it because they hate working people."
+    },
+    {
+      "pair_id": "symmetry-013",
+      "structure_key": "cloture_as_passage",
+      "left_claim": "Democrats blocked the bill from ever getting a vote.",
+      "right_claim": "Republicans blocked the bill from ever getting a vote."
+    },
+    {
+      "pair_id": "symmetry-014",
+      "structure_key": "suspension_as_normal",
+      "left_claim": "Democrats rammed it through without any debate at all.",
+      "right_claim": "Republicans rammed it through without any debate at all."
+    },
+    {
+      "pair_id": "symmetry-015",
+      "structure_key": "reconciliation_scope",
+      "left_claim": "Democrats used a budget trick to pass something unrelated.",
+      "right_claim": "Republicans used a budget trick to pass something unrelated."
+    },
+    {
+      "pair_id": "symmetry-016",
+      "structure_key": "veto_override_claim",
+      "left_claim": "Democrats overrode the veto with a simple majority.",
+      "right_claim": "Republicans overrode the veto with a simple majority."
+    },
+    {
+      "pair_id": "symmetry-017",
+      "structure_key": "cosponsor_as_support",
+      "left_claim": "Two hundred Democrats put their names on that bill.",
+      "right_claim": "Two hundred Republicans put their names on that bill."
+    },
+    {
+      "pair_id": "symmetry-018",
+      "structure_key": "agency_scope",
+      "left_claim": "A Democratic agency gave itself powers Congress never granted.",
+      "right_claim": "A Republican agency gave itself powers Congress never granted."
+    },
+    {
+      "pair_id": "symmetry-019",
+      "structure_key": "baseline_window",
+      "left_claim": "Since the Democrats took over, that number has doubled.",
+      "right_claim": "Since the Republicans took over, that number has doubled."
+    },
+    {
+      "pair_id": "symmetry-020",
+      "structure_key": "preemption",
+      "left_claim": "Democrats overruled every state law on the subject.",
+      "right_claim": "Republicans overruled every state law on the subject."
+    },
+    {
+      "pair_id": "symmetry-021",
+      "structure_key": "motion_to_table",
+      "left_claim": "Democrats voted to table the amendment protecting it.",
+      "right_claim": "Republicans voted to table the amendment protecting it."
+    },
+    {
+      "pair_id": "symmetry-022",
+      "structure_key": "conference_report",
+      "left_claim": "Democrats rewrote the whole bill after it already passed.",
+      "right_claim": "Republicans rewrote the whole bill after it already passed."
+    }
+  ]
+}

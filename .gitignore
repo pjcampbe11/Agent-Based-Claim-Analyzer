@@ -1,0 +1,33 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+dist/
+build/
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+# Local run ledgers and caches are machine state, never committed.
+# Published runs are exported deliberately via `abca ledger show --export`.
+.abca/
+
+# A configuration file with an inline api_key is a secret. `abca config init`
+# writes to the platform config directory rather than here, but a local copy is
+# a common convenience and committing one is a common accident.
+config.toml
+*.config.toml
+
+# Coverage and CI artifacts.
+.coverage
+coverage.xml
+htmlcov/
+platform-report.json
+
+# PyInstaller
+*.manifest
+
+# Saved-webpage captures and scratch from tooling sessions.
+*Identity Charter.html
+abca-src.tgz
+_stale-locks/

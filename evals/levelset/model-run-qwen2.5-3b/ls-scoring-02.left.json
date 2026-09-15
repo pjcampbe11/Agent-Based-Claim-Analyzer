@@ -1,0 +1,35 @@
+{
+  "text": "The tax cut adds three trillion to the debt. That is ten thousand dollars per person, this year, out of your future.",
+  "in_scope": true,
+  "topic": "taxes",
+  "gaps": [
+    {
+      "code": "SCORING",
+      "phrase": "three trillion",
+      "how_this_generally_works": "A tax cut does not add to the debt; it is a reduction in revenue that is offset by spending or other means.",
+      "confidence": "high",
+      "coerced": false,
+      "consensus_note": ""
+    }
+  ],
+  "platform": "eval",
+  "observed_date": "2026-09-05",
+  "thread_id": "",
+  "position": 0,
+  "role": "standalone",
+  "runs": 1,
+  "lints": {
+    "citations_redacted": 0,
+    "deficiency_redacted": 0,
+    "author_rewritten": 0,
+    "verdict_flagged": 0,
+    "codes_coerced": 0,
+    "topics_coerced": 0
+  },
+  "error": "",
+  "tool": "levelset/0.4.0",
+  "taxonomy": "gaps/1.0.0",
+  "eval_pair_id": "ls-scoring-02",
+  "eval_side": "left",
+  "eval_expected_code": "SCORING"
+}

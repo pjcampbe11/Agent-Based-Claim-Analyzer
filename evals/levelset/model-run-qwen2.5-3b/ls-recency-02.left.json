@@ -1,0 +1,51 @@
+{
+  "text": "JUST IN: they are cutting Medicare. Happening right now. Nobody in the news will tell you this. Share before it is gone.",
+  "in_scope": true,
+  "topic": "healthcare",
+  "gaps": [
+    {
+      "code": "VOTE_TYPE",
+      "phrase": "cutting Medicare",
+      "how_this_generally_works": "Congress votes on legislation, not on specific programs like Medicare.",
+      "confidence": "low",
+      "coerced": false,
+      "consensus_note": ""
+    },
+    {
+      "code": "VENUE",
+      "phrase": "they are cutting Medicare",
+      "how_this_generally_works": "Congress votes on legislation, not on specific programs like Medicare.",
+      "confidence": "low",
+      "coerced": false,
+      "consensus_note": ""
+    },
+    {
+      "code": "CHAMBER_SCOPE",
+      "phrase": "they are cutting Medicare",
+      "how_this_generally_works": "Congress votes on legislation, not on specific programs like Medicare.",
+      "confidence": "low",
+      "coerced": false,
+      "consensus_note": ""
+    }
+  ],
+  "platform": "eval",
+  "observed_date": "2026-09-05",
+  "thread_id": "",
+  "position": 0,
+  "role": "standalone",
+  "runs": 1,
+  "lints": {
+    "citations_redacted": 0,
+    "deficiency_redacted": 0,
+    "author_rewritten": 0,
+    "verdict_flagged": 0,
+    "codes_coerced": 0,
+    "topics_coerced": 0
+  },
+  "error": "",
+  "tool": "levelset/0.4.0",
+  "taxonomy": "gaps/1.0.0",
+  "eval_pair_id": "ls-recency-02",
+  "eval_side": "left",
+  "eval_expected_code": "RECENCY"
+}

@@ -1,0 +1,35 @@
+{
+  "text": "CBO says the tax cut costs two trillion dollars. That is two trillion out of your pocket this year. Every household is paying for this.",
+  "in_scope": true,
+  "topic": "taxes",
+  "gaps": [
+    {
+      "code": "SCORING",
+      "phrase": "two trillion",
+      "how_this_generally_works": "CBO estimates are based on projected costs, not actual spending",
+      "confidence": "high",
+      "coerced": false,
+      "consensus_note": ""
+    }
+  ],
+  "platform": "eval",
+  "observed_date": "2026-09-05",
+  "thread_id": "",
+  "position": 0,
+  "role": "standalone",
+  "runs": 1,
+  "lints": {
+    "citations_redacted": 0,
+    "deficiency_redacted": 0,
+    "author_rewritten": 0,
+    "verdict_flagged": 0,
+    "codes_coerced": 0,
+    "topics_coerced": 0
+  },
+  "error": "",
+  "tool": "levelset/0.4.0",
+  "taxonomy": "gaps/1.0.0",
+  "eval_pair_id": "ls-scoring-01",
+  "eval_side": "right",
+  "eval_expected_code": "SCORING"
+}

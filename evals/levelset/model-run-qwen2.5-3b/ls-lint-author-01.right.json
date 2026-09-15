@@ -1,0 +1,35 @@
+{
+  "text": "OP is right that the roads are failing, but the poster is blaming Washington for something the state legislature controls.",
+  "in_scope": true,
+  "topic": "environment",
+  "gaps": [
+    {
+      "code": "VENUE",
+      "phrase": "Washington",
+      "how_this_generally_works": "State legislature controls road funding and maintenance.",
+      "confidence": "medium",
+      "coerced": false,
+      "consensus_note": ""
+    }
+  ],
+  "platform": "eval",
+  "observed_date": "2026-09-05",
+  "thread_id": "",
+  "position": 0,
+  "role": "standalone",
+  "runs": 1,
+  "lints": {
+    "citations_redacted": 0,
+    "deficiency_redacted": 0,
+    "author_rewritten": 0,
+    "verdict_flagged": 0,
+    "codes_coerced": 0,
+    "topics_coerced": 0
+  },
+  "error": "",
+  "tool": "levelset/0.4.0",
+  "taxonomy": "gaps/1.0.0",
+  "eval_pair_id": "ls-lint-author-01",
+  "eval_side": "right",
+  "eval_expected_code": "GOVT_LEVEL"
+}

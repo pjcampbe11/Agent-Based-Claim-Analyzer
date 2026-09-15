@@ -1,0 +1,51 @@
+{
+  "text": "Senate Republicans just voted AGAINST lowering insulin costs. The vote was 49-50. They had the chance and they chose the drug companies.",
+  "in_scope": true,
+  "topic": "healthcare",
+  "gaps": [
+    {
+      "code": "VOTE_TYPE",
+      "phrase": "voted AGAINST",
+      "how_this_generally_works": "A procedural vote (cloture, motion to table, motion to recommit, motion to proceed) is described as a vote on the underlying policy.",
+      "confidence": "medium",
+      "coerced": false,
+      "consensus_note": ""
+    },
+    {
+      "code": "VENUE",
+      "phrase": "Senate Republicans",
+      "how_this_generally_works": "A vote on a procedural motion to lower insulin costs, not on the underlying policy itself.",
+      "confidence": "medium",
+      "coerced": false,
+      "consensus_note": ""
+    },
+    {
+      "code": "CHAMBER_SCOPE",
+      "phrase": "Senate Republicans",
+      "how_this_generally_works": "A vote on a procedural motion to lower insulin costs, not on the underlying policy itself.",
+      "confidence": "medium",
+      "coerced": false,
+      "consensus_note": ""
+    }
+  ],
+  "platform": "eval",
+  "observed_date": "2026-09-05",
+  "thread_id": "",
+  "position": 0,
+  "role": "standalone",
+  "runs": 1,
+  "lints": {
+    "citations_redacted": 0,
+    "deficiency_redacted": 0,
+    "author_rewritten": 0,
+    "verdict_flagged": 0,
+    "codes_coerced": 0,
+    "topics_coerced": 0
+  },
+  "error": "",
+  "tool": "levelset/0.4.0",
+  "taxonomy": "gaps/1.0.0",
+  "eval_pair_id": "ls-vote-type-01",
+  "eval_side": "left",
+  "eval_expected_code": "VOTE_TYPE"
+}

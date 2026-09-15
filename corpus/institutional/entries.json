@@ -1,0 +1,185 @@
+{
+  "entries": [
+    {
+      "aliases": [
+        "PAC",
+        "federal political committee"
+      ],
+      "citation": {
+        "content_hash": "sha256:03b2473f1d76d49b832cbbd77d5f4f30969f68305ad5720ebc5624a55e5722cd",
+        "quote": "which receives contributions aggregating in excess of $1,000 or which makes expenditures aggregating in excess of $1,000 during a calendar year is a political committee",
+        "retrieved_at": "2026-09-04T22:09:32.817111+00:00",
+        "tier": "T0",
+        "title": "11 CFR 100.5",
+        "url": "https://www.ecfr.gov/current/title-11/section-100.5"
+      },
+      "common_distortion": "The threshold is described as applying to any group that spends money on politics, with the $1,000 trigger and the calendar-year window left out.",
+      "distinguish_from": [
+        "elections.election"
+      ],
+      "domain": "elections",
+      "entry_version": "1.0.0",
+      "id": "elections.political_committee",
+      "plain_language": "A group turns into a federal political committee once it takes in more than $1,000 in donations in a year, or spends more than $1,000 in a year. Crossing either line is what starts the reporting rules.",
+      "secondary_citations": [],
+      "statement": "Under federal regulation a committee, club, association or other group of persons becomes a political committee when it receives contributions aggregating in excess of $1,000, or makes expenditures aggregating in excess of $1,000, during a calendar year.",
+      "term": "political committee",
+      "volatility": {
+        "rate": "low",
+        "review_due": "2027-09-04",
+        "valid_as_of": "2026-09-04"
+      }
+    },
+    {
+      "aliases": [
+        "federal election",
+        "primary",
+        "general election"
+      ],
+      "citation": {
+        "content_hash": "sha256:b0caa9cba099f468cc6af610ae60b2b744db18b62c79853c4e1ae397cc34579f",
+        "quote": "nation for election, or election, to Federal office. The specific types of elections",
+        "retrieved_at": "2026-09-04T22:09:32.817111+00:00",
+        "tier": "T0",
+        "title": "11 CFR 100.2",
+        "url": "https://www.ecfr.gov/current/title-11/section-100.2"
+      },
+      "common_distortion": "A per-election limit is reported as an annual or per-cycle limit, which misstates what a donor may lawfully give.",
+      "distinguish_from": [
+        "elections.political_committee"
+      ],
+      "domain": "elections",
+      "entry_version": "1.0.0",
+      "id": "elections.election",
+      "plain_language": "In federal campaign-finance rules a primary and a general election are two separate elections, not one. That matters because contribution limits apply per election.",
+      "secondary_citations": [],
+      "statement": "Federal regulation defines an election as a process by which individuals seek nomination for election, or election, to Federal office, and enumerates the specific types of election that fall within that definition.",
+      "term": "election",
+      "volatility": {
+        "rate": "low",
+        "review_due": "2027-09-04",
+        "valid_as_of": "2026-09-04"
+      }
+    },
+    {
+      "aliases": [
+        "IBR",
+        "incorporated standard"
+      ],
+      "citation": {
+        "content_hash": "sha256:9d5b89a48f8ad4a2cc2b714d3e165fd410b5f2655197ad1bc77ee008c78723b1",
+        "quote": "is deemed published in the Federal Register when incorporated by reference therein with the approval of the Director of the Federal Register",
+        "retrieved_at": "2026-09-04T22:09:32.817111+00:00",
+        "tier": "T0",
+        "title": "1 CFR 51.1",
+        "url": "https://www.ecfr.gov/current/title-1/section-51.1"
+      },
+      "common_distortion": "An industry standard referenced by a rule is described as binding without the approval step that gives it that status.",
+      "distinguish_from": [
+        "instruments.publication_policy"
+      ],
+      "domain": "instruments",
+      "entry_version": "1.0.0",
+      "id": "instruments.incorporation_by_reference",
+      "plain_language": "A rule can point at a document published somewhere else and treat it as if it were printed in the Federal Register. That only counts once the Director of the Federal Register approves it.",
+      "secondary_citations": [],
+      "statement": "Federal regulation provides that matter reasonably available to the class of persons affected is deemed published in the Federal Register when incorporated by reference with the approval of the Director of the Federal Register.",
+      "term": "incorporation by reference",
+      "volatility": {
+        "rate": "medium",
+        "review_due": "2027-09-04",
+        "valid_as_of": "2026-09-04"
+      }
+    },
+    {
+      "aliases": [
+        "published in the Federal Register",
+        "FR publication"
+      ],
+      "citation": {
+        "content_hash": "sha256:1ea611befcf27607587426d26f389a4599cee98cca7f59cdce8ab6361881440d",
+        "quote": "Publication policy",
+        "retrieved_at": "2026-09-04T22:09:32.817111+00:00",
+        "tier": "T0",
+        "title": "1 CFR 5.1",
+        "url": "https://www.ecfr.gov/current/title-1/section-5.1"
+      },
+      "common_distortion": "An internal agency memo or a press release is described as though it carried the status of a published rule.",
+      "distinguish_from": [
+        "instruments.incorporation_by_reference",
+        "lawmaking.federal_register_scope"
+      ],
+      "domain": "instruments",
+      "entry_version": "1.0.0",
+      "id": "instruments.publication_policy",
+      "plain_language": "Agency documents become official by being printed in the Federal Register. If something was never published there, it has not been through that step.",
+      "secondary_citations": [],
+      "statement": "Federal regulation sets the policy governing which documents are published in the Federal Register, the mechanism by which agency documents become officially available.",
+      "term": "Federal Register publication",
+      "volatility": {
+        "rate": "medium",
+        "review_due": "2027-09-04",
+        "valid_as_of": "2026-09-04"
+      }
+    },
+    {
+      "aliases": [
+        "paperwork burden",
+        "PRA collection"
+      ],
+      "citation": {
+        "content_hash": "sha256:4f267943cd2be94a87b91f26cfbf13424e0e9d1c9ba5b3da41850dcd8e8d9414",
+        "quote": "ten or more persons",
+        "retrieved_at": "2026-09-04T22:09:32.817111+00:00",
+        "tier": "T0",
+        "title": "5 CFR 1320.3",
+        "url": "https://www.ecfr.gov/current/title-5/section-1320.3"
+      },
+      "common_distortion": "A federal form or survey is described as unreviewed when the ten-person threshold is what determines whether the review applies.",
+      "distinguish_from": [],
+      "domain": "instruments",
+      "entry_version": "1.0.0",
+      "id": "instruments.information_collection",
+      "plain_language": "When a federal agency asks ten or more people for the same information, that counts as an official information collection and has to clear a review process first.",
+      "secondary_citations": [],
+      "statement": "Federal regulation defines a collection of information as the obtaining, causing to be obtained, soliciting, or requiring the disclosure of information by or for an agency from ten or more persons.",
+      "term": "information collection",
+      "volatility": {
+        "rate": "low",
+        "review_due": "2027-09-04",
+        "valid_as_of": "2026-09-04"
+      }
+    },
+    {
+      "aliases": [
+        "the Register",
+        "daily Federal Register"
+      ],
+      "citation": {
+        "content_hash": "sha256:ae43ab7262c99b911c14aaac007a1843a3d26c58e60d7fc489467cc381ccd8fd",
+        "quote": "Scope and purpose",
+        "retrieved_at": "2026-09-04T22:09:32.817111+00:00",
+        "tier": "T0",
+        "title": "1 CFR 2.1",
+        "url": "https://www.ecfr.gov/current/title-1/section-2.1"
+      },
+      "common_distortion": "A proposed rule appearing in the Register is reported as an enacted one, leaving the comment period out of the story.",
+      "distinguish_from": [
+        "instruments.publication_policy"
+      ],
+      "domain": "lawmaking",
+      "entry_version": "1.0.0",
+      "id": "lawmaking.federal_register_scope",
+      "plain_language": "The Federal Register is the government's daily record of what agencies are proposing and finalising. Proposed and final are different stages and appear as different documents.",
+      "secondary_citations": [],
+      "statement": "Federal regulation sets out the scope and purpose of the Federal Register system, the official daily publication for rules, proposed rules and notices of federal agencies.",
+      "term": "Federal Register",
+      "volatility": {
+        "rate": "low",
+        "review_due": "2027-09-04",
+        "valid_as_of": "2026-09-04"
+      }
+    }
+  ],
+  "version": "corpus/institutional/0.1.0"
+}

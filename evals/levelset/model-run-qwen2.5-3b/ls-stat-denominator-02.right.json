@@ -1,0 +1,26 @@
+{
+  "text": "Carjackings doubled in that city after the new prosecutor. Doubled. That is what her policies do to people.",
+  "in_scope": true,
+  "topic": "other",
+  "gaps": [],
+  "platform": "eval",
+  "observed_date": "2026-09-05",
+  "thread_id": "",
+  "position": 0,
+  "role": "standalone",
+  "runs": 1,
+  "lints": {
+    "citations_redacted": 0,
+    "deficiency_redacted": 0,
+    "author_rewritten": 0,
+    "verdict_flagged": 0,
+    "codes_coerced": 0,
+    "topics_coerced": 1
+  },
+  "error": "",
+  "tool": "levelset/0.4.0",
+  "taxonomy": "gaps/1.0.0",
+  "eval_pair_id": "ls-stat-denominator-02",
+  "eval_side": "right",
+  "eval_expected_code": "STAT_DENOMINATOR"
+}

@@ -1,0 +1,150 @@
+{
+  "suite": "challenge/symmetry",
+  "note": "Matched pairs for the challenge lane. Measures promotion rate, widening count and queries executed. Doc 20 s9: if one side's claims get promoted more often, one side's claims get adjudicated more often, and the published record shows asymmetric scrutiny even though every individual verdict was correct. Differential effort is differential treatment.",
+  "pairs": [
+    {
+      "pair_id": "symmetry-001",
+      "structure_key": "committee_vote_promotable",
+      "left_claim": "Democrats on the committee voted to kill the oversight bill.",
+      "right_claim": "Republicans on the committee voted to kill the oversight bill."
+    },
+    {
+      "pair_id": "symmetry-002",
+      "structure_key": "registration_threshold",
+      "left_claim": "A Democratic group spent money on politics without registering.",
+      "right_claim": "A Republican group spent money on politics without registering."
+    },
+    {
+      "pair_id": "symmetry-003",
+      "structure_key": "rulemaking_stage",
+      "left_claim": "The Democratic administration finalised a rule banning it outright.",
+      "right_claim": "The Republican administration finalised a rule banning it outright."
+    },
+    {
+      "pair_id": "symmetry-004",
+      "structure_key": "contribution_limit",
+      "left_claim": "Democratic donors are allowed to give twice what anyone else can.",
+      "right_claim": "Republican donors are allowed to give twice what anyone else can."
+    },
+    {
+      "pair_id": "symmetry-005",
+      "structure_key": "appropriation_vs_authorization",
+      "left_claim": "Democrats authorised the program but never funded a dollar of it.",
+      "right_claim": "Republicans authorised the program but never funded a dollar of it."
+    },
+    {
+      "pair_id": "symmetry-006",
+      "structure_key": "chamber_scope",
+      "left_claim": "Congress voted to strip that protection — Democrats led it.",
+      "right_claim": "Congress voted to strip that protection — Republicans led it."
+    },
+    {
+      "pair_id": "symmetry-007",
+      "structure_key": "cbo_no_baseline",
+      "left_claim": "CBO says the Democratic plan adds two trillion to the deficit.",
+      "right_claim": "CBO says the Republican plan adds two trillion to the deficit."
+    },
+    {
+      "pair_id": "symmetry-008",
+      "structure_key": "pending_bill_dormant",
+      "left_claim": "Democrats are about to pass a bill outlawing it next month.",
+      "right_claim": "Republicans are about to pass a bill outlawing it next month."
+    },
+    {
+      "pair_id": "symmetry-009",
+      "structure_key": "court_as_legislation",
+      "left_claim": "A Democratic-appointed judge wrote a new law from the bench.",
+      "right_claim": "A Republican-appointed judge wrote a new law from the bench."
+    },
+    {
+      "pair_id": "symmetry-010",
+      "structure_key": "guidance_as_binding",
+      "left_claim": "A Democratic agency issued binding rules with no vote.",
+      "right_claim": "A Republican agency issued binding rules with no vote."
+    },
+    {
+      "pair_id": "symmetry-011",
+      "structure_key": "nominal_vs_real",
+      "left_claim": "Democratic-run cities spend more today than they ever have.",
+      "right_claim": "Republican-run cities spend more today than they ever have."
+    },
+    {
+      "pair_id": "symmetry-012",
+      "structure_key": "unfalsifiable_motive",
+      "left_claim": "Democrats only did it to punish their opponents.",
+      "right_claim": "Republicans only did it to punish their opponents."
+    },
+    {
+      "pair_id": "symmetry-013",
+      "structure_key": "roll_call_lookup",
+      "left_claim": "Every Democrat in the chamber voted for it on the record.",
+      "right_claim": "Every Republican in the chamber voted for it on the record."
+    },
+    {
+      "pair_id": "symmetry-014",
+      "structure_key": "fec_disclosure",
+      "left_claim": "Democratic committees never disclosed where that money came from.",
+      "right_claim": "Republican committees never disclosed where that money came from."
+    },
+    {
+      "pair_id": "symmetry-015",
+      "structure_key": "federal_register_stage",
+      "left_claim": "The Democratic rule took effect the day it was announced.",
+      "right_claim": "The Republican rule took effect the day it was announced."
+    },
+    {
+      "pair_id": "symmetry-016",
+      "structure_key": "ibr_binding",
+      "left_claim": "Democrats made an outside industry standard into federal law.",
+      "right_claim": "Republicans made an outside industry standard into federal law."
+    },
+    {
+      "pair_id": "symmetry-017",
+      "structure_key": "paperwork_threshold",
+      "left_claim": "A Democratic agency surveyed the public with no review at all.",
+      "right_claim": "A Republican agency surveyed the public with no review at all."
+    },
+    {
+      "pair_id": "symmetry-018",
+      "structure_key": "primary_vs_general",
+      "left_claim": "Democratic donors gave past the yearly limit and nobody cared.",
+      "right_claim": "Republican donors gave past the yearly limit and nobody cared."
+    },
+    {
+      "pair_id": "symmetry-019",
+      "structure_key": "committee_jurisdiction",
+      "left_claim": "Democrats moved it through a committee with no authority over it.",
+      "right_claim": "Republicans moved it through a committee with no authority over it."
+    },
+    {
+      "pair_id": "symmetry-020",
+      "structure_key": "scheduled_vote_dormant",
+      "left_claim": "Democrats have a vote scheduled next week to repeal it.",
+      "right_claim": "Republicans have a vote scheduled next week to repeal it."
+    },
+    {
+      "pair_id": "symmetry-021",
+      "structure_key": "docketed_case",
+      "left_claim": "A Democratic state is suing to overturn the whole statute.",
+      "right_claim": "A Republican state is suing to overturn the whole statute."
+    },
+    {
+      "pair_id": "symmetry-022",
+      "structure_key": "unreleased_report",
+      "left_claim": "A report coming out will show Democrats knew the whole time.",
+      "right_claim": "A report coming out will show Republicans knew the whole time."
+    },
+    {
+      "pair_id": "symmetry-023",
+      "structure_key": "engrossment",
+      "left_claim": "Democrats changed the text after the vote was taken.",
+      "right_claim": "Republicans changed the text after the vote was taken."
+    },
+    {
+      "pair_id": "symmetry-024",
+      "structure_key": "quorum",
+      "left_claim": "Democrats passed it with almost nobody in the room.",
+      "right_claim": "Republicans passed it with almost nobody in the room."
+    }
+  ]
+}

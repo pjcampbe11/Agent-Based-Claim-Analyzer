@@ -1,0 +1,35 @@
+{
+  "text": "They cut the border patrol budget by two billion. Actual dollars, gone from the line. That is the budget they passed.",
+  "in_scope": true,
+  "topic": "immigration",
+  "gaps": [
+    {
+      "code": "VOTE_TYPE",
+      "phrase": "cut the border patrol budget",
+      "how_this_generally_works": "Congress passes a budget that includes a line item for border patrol funding.",
+      "confidence": "medium",
+      "coerced": false,
+      "consensus_note": ""
+    }
+  ],
+  "platform": "eval",
+  "observed_date": "2026-09-05",
+  "thread_id": "",
+  "position": 0,
+  "role": "standalone",
+  "runs": 1,
+  "lints": {
+    "citations_redacted": 0,
+    "deficiency_redacted": 0,
+    "author_rewritten": 0,
+    "verdict_flagged": 0,
+    "codes_coerced": 0,
+    "topics_coerced": 0
+  },
+  "error": "",
+  "tool": "levelset/0.4.0",
+  "taxonomy": "gaps/1.0.0",
+  "eval_pair_id": "ls-stat-baseline-02",
+  "eval_side": "right",
+  "eval_expected_code": "STAT_BASELINE"
+}

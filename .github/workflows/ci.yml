@@ -1,0 +1,271 @@
+# CI for abCA.
+#
+# Five jobs. The middle three are the ones that matter: they hold the tool to
+# the standard it applies to everyone else. `release` is the one that
+# produces something a person downloads.
+#
+# `test` runs the unit suite on Windows and Linux. Windows first in the matrix
+# because it is the primary desktop target and the platform where path handling,
+# line endings and the data-directory logic actually differ.
+#
+# `network` runs the opt-in tests that hit real government servers. Allowed to
+# fail the job WITHOUT failing the build on a schedule, because a state
+# legislature's web server being down is not a defect in this repository -- but
+# it is reported, because a connector that has quietly stopped working is.
+#
+# `identity` holds the tool's brand guide to the tool's own evidence standard:
+# the marks must match their generator and the guide's contrast numbers must be
+# true. A style guide that asserts its own accessibility without measuring it is
+# the same failure this repository exists to catch, in miniature. The same job
+# runs the symmetry gate, for the same reason at a larger scale: a system that
+# treats one side of a matched pair more sceptically than the other fails
+# SILENTLY -- every verdict looks defensible on its own -- so the only place it
+# can be caught is in the aggregate, on every commit.
+#
+# `model` provisions a real model on the runner -- Ollama, small open-weight
+# models, CPU only -- so the check that was permanently deferred for want of
+# one can actually execute: levelset's model-half symmetry gate. A check
+# nothing can run is indistinguishable from a check that does not work.
+#
+# `release` freezes abca.exe and abca-gui.exe with PyInstaller on a Windows
+# runner, executes the frozen binaries to prove they work, and on a `v*` tag
+# attaches the zip to a GitHub Release.
+
+name: ci
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  pull_request:
+  workflow_dispatch:
+  schedule:
+    # Weekly, to catch a connector that has silently stopped working. A source
+    # that changed its URL scheme breaks retrieval without breaking any unit
+    # test, because the unit tests use a fake transport.
+    - cron: "17 6 * * 1"
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, ubuntu-latest]
+        python: ["3.11", "3.13"]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev,pdf]"
+      - name: Lint
+        run: ruff check src tests scripts tools
+      - name: Test
+        run: pytest -q --cov=abca --cov-report=term
+      - name: Prompts contain no political positions
+        # The mechanical half of the separation the README promises. Run as its
+        # own step so its failure is unmistakable in the job summary rather than
+        # buried in a test count.
+        run: python -c "from abca.prompts import assert_doctrine_free; assert_doctrine_free(); print('prompts are doctrine-free')"
+
+  identity:
+    # The tool's self-description, checked the way the tool checks everything.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -e ".[dev]"
+      - name: Marks match their generator
+        # One outline, thirteen files. A mark edited by hand is a second copy of
+        # the animal, and a second copy is where the drift starts.
+        run: python scripts/build_identity.py --check
+      - name: The style guide's contrast claims are true
+        run: python scripts/check_contrast.py
+      - name: Identity is data, and the prompts have never heard of it
+        run: pytest -q tests/test_identity.py
+      - name: The institutional corpus is structurally sound
+        # Offline half: no-conclusion lint, quote length, contrast integrity,
+        # staleness. The LIVE half re-fetches every citation and runs on the
+        # weekly schedule with the connector tests, because a government web
+        # server being slow is not a defect in this repository -- but a citation
+        # that has silently stopped saying what we claim is.
+        run: python scripts/check_context_pack.py
+      - name: The symmetry suites are structurally matched
+        # A partisan system is not caught by reading its verdicts one at a time:
+        # every individual answer can be defensible while the SET leans. This
+        # step checks the control itself -- that each pair is genuinely matched
+        # (same structure, opposite valence, comparable length) and that there
+        # are enough pairs for the exact test to be able to say anything at all.
+        run: python scripts/check_symmetry.py
+      - name: The lanes treat matched pairs alike
+        # Runs the real sourceless and challenge lanes over both suites with a
+        # hash-seeded stub -- deterministic, and seeded off claim IDENTITY, never
+        # off wording, so the stub cannot itself smuggle in the asymmetry it is
+        # meant to detect. Fails on measured asymmetry (p < 0.05) AND on an
+        # underpowered sample: INDETERMINATE is a failure here, because "we
+        # could not tell" must never be reported as "we found no bias".
+        run: python scripts/check_symmetry.py --run
+      - name: levelset may not report a gap that leans
+        # Doc 21 s8 item 1, the highest-priority open item for that tool, run as
+        # a GATE rather than a follow-up. If the instrument records more
+        # comprehension gaps on one side than the other, the published report
+        # says one side of the country understands its own government worse than
+        # the other -- an enormous claim, far likelier an artifact of the model
+        # than a fact about the population, and indistinguishable from the real
+        # thing to any reader. This step clears the CODE half; the model half
+        # needs a backend and is run before any corpus is published.
+        run: python scripts/check_levelset_symmetry.py --run
+      - name: levelset is isolated from the pipeline, and stays isolated
+        run: pytest -q tests/test_levelset.py
+      - name: The README's contents list is generated, current, and resolves
+        run: |
+          python scripts/build_readme_toc.py --check
+          pytest -q tests/test_readme.py
+
+  network:
+    # Opt-in tests against real sources. Never blocks a merge; always reported.
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -e ".[dev]"
+      - name: Live source connectors
+        run: pytest -q -m network
+      - name: Every corpus citation still says what the entry claims
+        run: python scripts/check_context_pack.py --live
+
+  model:
+    # THE JOB THAT MAKES "no runner has a model" UNTRUE.
+    #
+    # One check in this repository was, for a long time, permanently deferred
+    # with the same sentence: it needs a configured model, and no runner has
+    # one. That is a reason, and left alone long enough it becomes an excuse --
+    # a check nothing can execute is indistinguishable from a check that does
+    # not work.
+    #
+    # So the runner provisions its own model. Ollama installs on ubuntu-latest,
+    # small open-weight models answer on CPU, and the weights are cached between
+    # runs so the cost is paid once. What this proves is NOT that a 1.5B model
+    # is a good adjudicator -- it is not, and every artifact this job uploads
+    # says so. It proves the whole path executes against a real model: prompts
+    # render, structured output parses, contract gates hold, the ledger writes,
+    # and the symmetry harness completes a full pass without a malformed reply
+    # ending the run. That is the half that breaks silently.
+    #
+    # Scheduled and manual only. It takes tens of minutes and must never sit
+    # between a contributor and a merge.
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -e ".[dev]"
+
+      - name: Cache model weights
+        # Keyed on the config file, so changing a pinned model invalidates the
+        # cache instead of silently serving the old weights under a new name.
+        uses: actions/cache@v4
+        with:
+          path: ~/.ollama/models
+          key: ollama-${{ hashFiles('.github/ci-model-config.toml') }}
+
+      - name: Install Ollama
+        # zstd first: the installer needs it to unpack and fails with a message
+        # that reads like a network error when it is missing.
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y zstd
+          curl -fsSL https://ollama.com/install.sh | sh
+          nohup ollama serve > /tmp/ollama.log 2>&1 &
+          for _ in $(seq 1 30); do
+            curl -sf http://127.0.0.1:11434/api/version && break || sleep 2
+          done
+          ollama --version
+
+      - name: Pull the pinned models
+        run: |
+          ollama pull qwen2.5:3b-instruct
+          ollama pull llama3.2:1b-instruct-q4_K_M
+          ollama pull nomic-embed-text:v1.5
+          ollama list
+
+      - name: Every role resolves to a pinned model on this runner
+        # The cheapest possible assertion that the runner is actually
+        # configured, made BEFORE anything expensive runs. Verified against a
+        # live Ollama with exactly this config: all six roles ok, all pinnable,
+        # so runs are recorded as reproducible.
+        env:
+          ABCA_CONFIG: ${{ github.workspace }}/.github/ci-model-config.toml
+        run: abca models check
+
+      - name: levelset symmetry — THE MODEL HALF
+        # The half a stub cannot cover. The stub run in the `identity` job proves
+        # levelset's own code treats both sides of a matched pair alike; this
+        # proves the MODEL does. A corpus is not publishable until both pass, and
+        # until this job existed the second half was unrunnable anywhere.
+        run: |
+          python scripts/check_levelset_symmetry.py --run --backend ollama --model qwen2.5:3b-instruct --max-tokens 1024 --records-dir levelset-model-records
+
+      - name: Upload the readings the gate actually made
+        # A model-half verdict costs real inference and cannot be reproduced by
+        # re-reading an exit code, so the readings are published and can be
+        # spot-checked by hand. This is the same argument as the run ledger,
+        # applied to the gate that guards the instrument.
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: levelset-model-records
+          path: levelset-model-records/
+
+  release:
+    # The Windows release: abca.exe and abca-gui.exe in one folder, zipped.
+    #
+    # Runs on EVERY push, not just tags, because a release build that only runs
+    # at release time is a release build that is broken at release time. On an
+    # ordinary push it builds and checks; on a `v*` tag it also attaches the
+    # zip to a GitHub Release. The check is not "PyInstaller exited 0" -- it is
+    # scripts/build_release.py executing the FROZEN executables: version,
+    # schema, every command group's help, a grammar (package data travelled),
+    # and the frozen GUI constructing its window and running a command through
+    # the frozen CLI beside it. Windows runners have a display, so that last
+    # check is real here.
+    runs-on: windows-latest
+    permissions:
+      contents: write   # to attach the zip to a release on a tag
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -e ".[dev,release]"
+      - name: The GUI is generated from the CLI, and the window builds here
+        # Windows has a display, so the Tk tests that skip on a headless Linux
+        # runner run for real on the platform the release targets.
+        run: pytest -q tests/test_gui.py
+      - name: Build, then prove the frozen executables work
+        run: python scripts/build_release.py
+      - name: Upload the release zip
+        uses: actions/upload-artifact@v4
+        with:
+          name: abca-windows-release
+          path: dist/abca-*.zip
+      - name: Attach to the GitHub Release
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/abca-*.zip
+          generate_release_notes: true

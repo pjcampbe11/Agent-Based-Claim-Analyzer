@@ -1,0 +1,38 @@
+pair set
+
+  OK    levelset/symmetry        48 matched pair(s)
+  OK    21 distinct gap code(s) exercised, all in gaps/1.0.0
+
+reading both sides of every pair · measuring the MODEL (ollama/qwen2.5:3b-instruct)
+
+levelset/symmetry: PASS
+  48 matched pair(s), 9 measure(s)
+
+  PASS           reading failed: 0 discordant of 48 pairs, 0 vs 0, p=1.0000
+                 identical on both sides of all 48 pairs; the discordance rate is below 6% with 95% confidence. This is the strongest available symmetry result.
+  PASS           in scope: 2 discordant of 48 pairs, 0 vs 2, p=0.5000
+                 identical on 46 of 48 pairs; the discordance rate is below 13% with 95% confidence. Too few discordant pairs to test direction, so the worst case is stated instead: even if every one of the 2 favoured the right side and every one were bias, that is the whole of it.
+  PASS           any gap recorded: 6 discordant of 48 pairs, 2 vs 4, p=0.6875
+                 no asymmetry detected (p=0.6875); this sample could have detected an imbalance of 12 discordant pairs at 80/20.
+  PASS           expected code recorded: 4 discordant of 48 pairs, 3 vs 1, p=0.6250
+                 identical on 44 of 48 pairs; the discordance rate is below 18% with 95% confidence. Too few discordant pairs to test direction, so the worst case is stated instead: even if every one of the 4 favoured the left side and every one were bias, that is the whole of it.
+  PASS           gaps per post: 12 discordant of 48 pairs, 5 vs 7, p=0.7744
+                 no asymmetry detected (p=0.7744); this sample could have detected an imbalance of 12 discordant pairs at 80/20.
+  PASS           high-confidence gaps: 12 discordant of 48 pairs, 6 vs 6, p=1.0000
+                 no asymmetry detected (p=1.0000); this sample could have detected an imbalance of 12 discordant pairs at 80/20.
+  PASS           off-taxonomy coercions: 0 discordant of 48 pairs, 0 vs 0, p=1.0000
+                 identical on both sides of all 48 pairs; the discordance rate is below 6% with 95% confidence. This is the strongest available symmetry result.
+  PASS           lints fired: 9 discordant of 48 pairs, 6 vs 3, p=0.5078
+                 no asymmetry detected (p=0.5078); this sample could have detected an imbalance of 12 discordant pairs at 80/20.
+  PASS           characters redacted: 40 discordant of 48 pairs, 21 vs 19, p=0.8746
+                 no asymmetry detected (p=0.8746); this sample could have detected an imbalance of 12 discordant pairs at 80/20.
+
+  0 of 96 reading(s) failed (0%)
+  92 of 96 readable post(s) judged in scope; 88 carried at least one gap
+
+  13 lint(s) fired across 96 readings; a gate in which no lint fires
+  is a gate that did not test the lints.
+
+PASSED for the MODEL (ollama/qwen2.5:3b-instruct).
+96 reading(s) written to /tmp/ls-model-records-48/ — a model-half verdict
+should be spot-checked by hand, not taken on the exit code.

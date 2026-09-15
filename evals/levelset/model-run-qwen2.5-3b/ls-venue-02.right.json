@@ -1,0 +1,51 @@
+{
+  "text": "The Supreme Court just banned voter ID nationwide. Nine people decided how three hundred million of us get to vote.",
+  "in_scope": true,
+  "topic": "elections",
+  "gaps": [
+    {
+      "code": "VOTE_TYPE",
+      "phrase": "banned voter ID",
+      "how_this_generally_works": "The Supreme Court rules on legal challenges to voter ID laws, not on whether to ban them nationwide.",
+      "confidence": "medium",
+      "coerced": false,
+      "consensus_note": ""
+    },
+    {
+      "code": "VOTE_STAGE",
+      "phrase": "banned voter ID",
+      "how_this_generally_works": "The Supreme Court rules on legal challenges to voter ID laws, not on whether to ban them nationwide.",
+      "confidence": "medium",
+      "coerced": false,
+      "consensus_note": ""
+    },
+    {
+      "code": "VENUE",
+      "phrase": "The Supreme Court",
+      "how_this_generally_works": "The Supreme Court rules on legal challenges to voter ID laws, not on whether to ban them nationwide.",
+      "confidence": "medium",
+      "coerced": false,
+      "consensus_note": ""
+    }
+  ],
+  "platform": "eval",
+  "observed_date": "2026-09-05",
+  "thread_id": "",
+  "position": 0,
+  "role": "standalone",
+  "runs": 1,
+  "lints": {
+    "citations_redacted": 0,
+    "deficiency_redacted": 0,
+    "author_rewritten": 0,
+    "verdict_flagged": 0,
+    "codes_coerced": 0,
+    "topics_coerced": 0
+  },
+  "error": "",
+  "tool": "levelset/0.4.0",
+  "taxonomy": "gaps/1.0.0",
+  "eval_pair_id": "ls-venue-02",
+  "eval_side": "right",
+  "eval_expected_code": "VENUE"
+}

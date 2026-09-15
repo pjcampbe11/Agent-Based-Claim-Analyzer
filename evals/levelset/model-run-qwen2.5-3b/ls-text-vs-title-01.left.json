@@ -1,0 +1,26 @@
+{
+  "text": "It is called the Inflation Reduction Act and inflation went UP. They cannot even name their own bills honestly.",
+  "in_scope": true,
+  "topic": "other",
+  "gaps": [],
+  "platform": "eval",
+  "observed_date": "2026-09-05",
+  "thread_id": "",
+  "position": 0,
+  "role": "standalone",
+  "runs": 1,
+  "lints": {
+    "citations_redacted": 0,
+    "deficiency_redacted": 0,
+    "author_rewritten": 0,
+    "verdict_flagged": 0,
+    "codes_coerced": 0,
+    "topics_coerced": 0
+  },
+  "error": "",
+  "tool": "levelset/0.4.0",
+  "taxonomy": "gaps/1.0.0",
+  "eval_pair_id": "ls-text-vs-title-01",
+  "eval_side": "left",
+  "eval_expected_code": "TEXT_VS_TITLE"
+}

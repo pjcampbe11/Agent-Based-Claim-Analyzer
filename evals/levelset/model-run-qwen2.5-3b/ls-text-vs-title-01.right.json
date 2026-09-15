@@ -1,0 +1,51 @@
+{
+  "text": "It is called the Tax Cuts and Jobs Act and my taxes went UP. They cannot even name their own bills honestly.",
+  "in_scope": true,
+  "topic": "taxes",
+  "gaps": [
+    {
+      "code": "VOTE_TYPE",
+      "phrase": "Tax Cuts and Jobs Act",
+      "how_this_generally_works": "The Tax Cuts and Jobs Act is a bill that was debated and voted on, not a name for the tax changes that occurred.",
+      "confidence": "medium",
+      "coerced": false,
+      "consensus_note": ""
+    },
+    {
+      "code": "SCOPE_QUANTIFIER",
+      "phrase": "their own bills",
+      "how_this_generally_works": "The Tax Cuts and Jobs Act was a bill that was debated and voted on, not a name for the tax changes that occurred.",
+      "confidence": "medium",
+      "coerced": false,
+      "consensus_note": ""
+    },
+    {
+      "code": "OTHER",
+      "phrase": "cannot even name their own bills honestly",
+      "how_this_generally_works": "The Tax Cuts and Jobs Act was a bill that was debated and voted on, not a name for the tax changes that occurred.",
+      "confidence": "medium",
+      "coerced": false,
+      "consensus_note": ""
+    }
+  ],
+  "platform": "eval",
+  "observed_date": "2026-09-05",
+  "thread_id": "",
+  "position": 0,
+  "role": "standalone",
+  "runs": 1,
+  "lints": {
+    "citations_redacted": 0,
+    "deficiency_redacted": 0,
+    "author_rewritten": 0,
+    "verdict_flagged": 0,
+    "codes_coerced": 0,
+    "topics_coerced": 0
+  },
+  "error": "",
+  "tool": "levelset/0.4.0",
+  "taxonomy": "gaps/1.0.0",
+  "eval_pair_id": "ls-text-vs-title-01",
+  "eval_side": "right",
+  "eval_expected_code": "TEXT_VS_TITLE"
+}

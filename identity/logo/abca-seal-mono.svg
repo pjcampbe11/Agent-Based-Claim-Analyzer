@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400" role="img">
+  <title>Seal of the agent-based Claim Analyzer</title>
+  <circle cx="200" cy="200" r="198" fill="#F4F1EA"/>
+  <circle cx="200" cy="200" r="192" fill="none" stroke="#1B2A2E" stroke-width="2.5"/>
+  <circle cx="200" cy="200" r="146" fill="none" stroke="#1B2A2E" stroke-width="7"/>
+  <circle cx="200" cy="200" r="136" fill="#1B2A2E"/>
+  <defs>
+    <path id="seal-top" d="M 200 200 m -168 0 a 168 168 0 1 1 336 0"/>
+    <path id="seal-bottom" d="M 32 200 a 168 168 0 0 0 336 0"/>
+  </defs>
+  <g font-family="Helvetica Neue, Helvetica, Arial, DejaVu Sans, sans-serif" font-weight="700" fill="#1B2A2E" font-size="23" letter-spacing="1.6">
+    <text><textPath href="#seal-top" startOffset="50%" text-anchor="middle">AGENT-BASED CLAIM ANALYZER</textPath></text>
+    <text font-size="23" letter-spacing="5"><textPath href="#seal-bottom" startOffset="50%" text-anchor="middle">CHECK IT YOURSELF</textPath></text>
+  </g>
+  <g fill="#1B2A2E">
+    <path transform="translate(26 200)" d="M 0.00 -11.00 L 2.70 -3.72 L 10.46 -3.40 L 4.37 1.42 L 6.47 8.90 L 0.00 4.60 L -6.47 8.90 L -4.37 1.42 L -10.46 -3.40 L -2.70 -3.72 Z"/>
+    <path transform="translate(374 200)" d="M 0.00 -11.00 L 2.70 -3.72 L 10.46 -3.40 L 4.37 1.42 L 6.47 8.90 L 0.00 4.60 L -6.47 8.90 L -4.37 1.42 L -10.46 -3.40 L -2.70 -3.72 Z"/>
+  </g>
+  <g transform="translate(89.3 104.1) scale(1.02)">
+    <path fill="#F4F1EA" fill-rule="evenodd" d="M 184 106
+  C 173 113, 159 120, 143 126
+  C 126 132, 107 136, 89 137
+  C 77 138, 65 137, 55 135
+  L 33 104
+  C 33  94,  36 83,  41 74
+  C 44  69,  48 64,  52 61
+  C 54  55,  59 51,  66 51
+  C 72  51,  77 55,  79 60
+  C 88  56,  99 55, 109 58
+  C 118 61, 125 65, 131 71
+  C 136 76, 141 81, 147 86
+  C 157 94, 169 101, 178 104
+  C 181 105, 183 106, 184 106
+  Z M 114 77 a 7.5 6 -20 1 0 0.1 0 Z"/>
+  </g>
+</svg>

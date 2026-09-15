@@ -1,0 +1,80 @@
+# Model configuration for CI runs that need a real model.
+#
+# WHY THIS FILE EXISTS
+# ====================
+# The repository's default config (`abca config init`) pins qwen2.5:32b for
+# adjudication, which is the right default for a machine that can serve it and
+# impossible on a two-core GitHub runner with no GPU. For a long time the honest
+# consequence was a `platform` job that said, in its own output, that it had NOT
+# produced verdicts -- and a levelset symmetry gate whose model half nothing
+# could execute.
+#
+# A job that permanently cannot do the thing its name claims is a job that
+# should either be removed or made real. This file makes it real: small
+# open-weight models that fit in a runner's memory and answer on CPU.
+#
+# WHAT THIS IS NOT
+# ================
+# These are NOT the models anyone should publish a finding with. A 1.5B model
+# is a weak adjudicator and every report produced with it must say so. What a
+# runner-sized model DOES prove is the thing that actually breaks silently:
+# that the whole path executes end to end against a real model -- prompts render,
+# grammars constrain, structured output parses, contract gates hold, the ledger
+# writes, and the symmetry harness can complete a full pass without a malformed
+# reply ending the run.
+#
+# Model quality is a separate question, argued about with the ledger. Whether
+# the machinery works at all is this file's question, and it is answerable here.
+
+seed          = 42
+temperature   = 0.0
+max_claims    = 200
+reading_level = 8
+
+# Pinned by exact tag, never a floating one. A CI job whose model can change
+# under it produces results that cannot be compared across runs, which defeats
+# the purpose of running it on a schedule.
+#
+# 3B, not 1.5B, and the difference is not a preference. Measured on the levelset
+# symmetry corpus, qwen2.5:1.5b marked 46 of 52 readable posts as making no
+# claim about a political mechanism -- every post in that corpus makes one -- and
+# truncated 19% of its replies past the token ceiling. It produced almost no
+# readings to compare, which is a way of failing that LOOKS like agreement.
+# qwen2.5:3b read the same corpus with zero failures and every post in scope.
+# A model too weak to read the input cannot be used to prove anything about how
+# evenly the input is treated.
+[models.classifier]
+provider = "ollama"
+model    = "qwen2.5:3b-instruct"
+
+[models.segmenter]
+provider = "ollama"
+model    = "qwen2.5:3b-instruct"
+
+[models.adjudicator]
+provider = "ollama"
+model    = "qwen2.5:3b-instruct"
+
+# The red team should be an INDEPENDENT model -- a model reviewing its own
+# reasoning is the one least able to see where it reached. Different family, not
+# just a different tag, which is the part that matters.
+[models.redteam]
+provider = "ollama"
+model    = "llama3.2:1b-instruct-q4_K_M"
+
+# Independent of the adjudicator, and the config loader REFUSES to start if it
+# is not: a model that grades its own simplification reproduces its own
+# misreadings, and the plain-language fidelity gate then silently passes
+# everything. This file's first draft got that wrong and was rejected at load
+# time rather than producing a run whose fidelity numbers meant nothing.
+[models.backtranslate]
+provider = "ollama"
+model    = "llama3.2:1b-instruct-q4_K_M"
+
+# Pinned to an explicit version, not the bare name. A bare `nomic-embed-text`
+# resolves to :latest, and embeddings from two different :latest are not
+# comparable -- clusters would silently reshape between scheduled runs and the
+# diff would look like a change in the corpus.
+[models.embedder]
+provider = "ollama"
+model    = "nomic-embed-text:v1.5"

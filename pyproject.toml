@@ -1,0 +1,159 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "abca"
+version = "0.1.0"
+description = "abCA - agent-based Claim Analyzer: reproducible, cited analysis of political claims"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+keywords = ["fact-checking", "reproducibility", "provenance", "civic-tech", "llm"]
+authors = [{ name = "pjcampbe11" }]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: Legal Industry",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: Microsoft :: Windows",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Text Processing :: Linguistic",
+    "Typing :: Typed",
+]
+
+# Deliberately minimal. Every dependency added here is a dependency the
+# reproducibility story has to account for, because library versions are
+# recorded in the run environment and reported on verification mismatch.
+#
+# This list MUST stay inside [project]. A TOML table runs until the next
+# header, and an earlier revision had it below [project.urls], where hatchling
+# read `dependencies` as a URL and every fresh `pip install` failed -- while an
+# already-installed dev environment kept working and hid it. CI caught it on the
+# first push; tests/test_packaging.py now catches it before one.
+dependencies = [
+    "pydantic>=2.7,<3",
+    "typer>=0.12",
+    "rich>=13",
+]
+
+[project.urls]
+Homepage = "https://github.com/pjcampbe11/abCA"
+Repository = "https://github.com/pjcampbe11/abCA"
+Issues = "https://github.com/pjcampbe11/abCA/issues"
+
+[project.optional-dependencies]
+# hatchling is the build backend and is listed here too, so
+# tests/test_packaging.py can ask it in-process whether this file is buildable
+# -- the check CI runs first and the one an installed dev environment never
+# repeats on its own.
+dev = ["pytest>=8", "pytest-cov", "ruff", "mypy", "hatchling"]
+
+# Reading PDFs with -f. An extra rather than a dependency: a PDF's text layer is
+# a positioned glyph soup with no paragraph structure, so there is no honest
+# stdlib-only version -- but every other supported input format needs nothing,
+# and most runs never touch a PDF. Absent the extra, a PDF is refused with the
+# install command rather than half-read.
+pdf = ["pypdf>=4"]
+
+# Only what builds the Windows release. Kept out of `dev` so the test matrix
+# does not pull a freezer it never uses.
+release = ["pyinstaller>=6.6"]
+
+[project.scripts]
+abca = "abca.cli.main:app"
+
+# The desktop front end. Separate entry point rather than a flag on `abca`,
+# because the release ships it as a windowed executable (no console) beside the
+# console one, and the GUI locates the CLI by that neighbour's name.
+[project.gui-scripts]
+abca-gui = "abca.gui.app:main"
+
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/abca"]
+
+# Prompt files are package DATA, not source. Without this they resolve fine
+# from a git checkout and disappear the moment someone pip-installs the tool --
+# and they would fail at run time, mid-analysis, rather than at import.
+[tool.hatch.build.targets.wheel.force-include]
+"src/abca/prompts" = "abca/prompts"
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+# Network tests are opt-in. A unit suite that reaches a state legislature's web
+# server is slow, flaky, and rude. Run them deliberately: `pytest -m network`.
+addopts = "-m 'not network'"
+markers = ["network: hits a real external service; skipped by default"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+# A DELIBERATE set, not ruff's default. Without an explicit list, a ruff upgrade
+# silently changes what CI enforces -- so a build that passed yesterday fails
+# today for reasons nobody chose, which is how a team learns to ignore its
+# linter.
+#
+# Chosen for rules that catch real defects here: unused names, import order,
+# dead code, naive datetimes (every timestamp in a run record must be aware, and
+# a naive one corrupts it), and implicit string concatenation, which has
+# silently eaten a comma in this repo more than once.
+select = [
+    "E", "W",   # pycodestyle
+    "F",        # pyflakes
+    "I",        # import order
+    "UP",       # pyupgrade
+    "B",        # bugbear
+    "SIM",      # simplify
+    "C4",       # comprehensions
+    "DTZ",      # naive datetimes
+    "ISC",      # implicit string concatenation
+    "RUF",      # ruff-specific
+]
+ignore = [
+    # Line length is NOT enforced, and that is a considered choice rather than a
+    # surrender. This codebase's defining feature is long explanatory prose --
+    # docstrings that argue for a design decision, and error messages that tell
+    # somebody what to do about it. Hard-wrapping those at a column makes them
+    # harder to read, and a rule that fires forty times on deliberate prose is a
+    # rule people learn to skip past. `line-length` still guides the formatter;
+    # it is simply not a build failure.
+    "E501",
+    # Ambiguous-unicode rules. Every character they flag is deliberate: `×` is a
+    # column header meaning "how many claims this verdict covers", and the
+    # typographic apostrophes sit in a list of real abbreviations the sentence
+    # splitter has to survive.
+    "RUF001", "RUF002", "RUF003",
+    # `match=` patterns in tests read as prose. Escaping every parenthesis in an
+    # expected error message makes the test harder to read than the message.
+    "RUF043",
+]
+
+[tool.ruff.lint.per-file-ignores]
+# The invisible-character sets are literal on purpose: a `\u200b` escape inside
+# a character class is a bug nobody can see, and these constants exist precisely
+# to name characters that cannot be seen.
+"src/abca/pipeline/ingest.py" = ["PLE2502"]
+# Atomic writes: open a temp file, write, fsync, os.replace. A context manager
+# would close it before the rename, which is the bug being avoided.
+# The abbreviation table is one readable block of whitespace-separated tokens.
+# A 60-element list literal would be six times as long and no clearer, and this
+# is data a human scans and extends.
+"src/abca/pipeline/sentences.py" = ["SIM905"]
+"src/abca/ledger/inputs.py" = ["SIM115"]
+"src/abca/ledger/store.py" = ["SIM115"]
+"src/abca/sources/cache.py" = ["SIM115"]
+"src/abca/challenge/queue.py" = ["SIM115"]
+# Demos import after a sys.path insert, by necessity: they run from a checkout
+# without the package installed.
+"scripts/*" = ["E402"]
+# Naive datetimes are deterministic fixture values, and a nested `with` is
+# sometimes the thing under test.
+"tests/*" = ["DTZ001", "DTZ005", "C408", "SIM117", "RUF059"]

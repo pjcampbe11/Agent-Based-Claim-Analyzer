@@ -1,0 +1,51 @@
+{
+  "text": "Congress should just ban these local sanctuary rules. One vote in Washington and every town could finally enforce the law.",
+  "in_scope": true,
+  "topic": "immigration",
+  "gaps": [
+    {
+      "code": "VOTE_TYPE",
+      "phrase": "one vote",
+      "how_this_generally_works": "A vote in Congress to pass a bill",
+      "confidence": "medium",
+      "coerced": false,
+      "consensus_note": ""
+    },
+    {
+      "code": "VENUE",
+      "phrase": "Washington",
+      "how_this_generally_works": "Congressional chamber where a bill is debated and voted on",
+      "confidence": "medium",
+      "coerced": false,
+      "consensus_note": ""
+    },
+    {
+      "code": "CHAMBER_SCOPE",
+      "phrase": "Congress",
+      "how_this_generally_works": "Congress consists of the Senate and the House of Representatives",
+      "confidence": "medium",
+      "coerced": false,
+      "consensus_note": ""
+    }
+  ],
+  "platform": "eval",
+  "observed_date": "2026-09-05",
+  "thread_id": "",
+  "position": 0,
+  "role": "standalone",
+  "runs": 1,
+  "lints": {
+    "citations_redacted": 0,
+    "deficiency_redacted": 0,
+    "author_rewritten": 0,
+    "verdict_flagged": 0,
+    "codes_coerced": 0,
+    "topics_coerced": 0
+  },
+  "error": "",
+  "tool": "levelset/0.4.0",
+  "taxonomy": "gaps/1.0.0",
+  "eval_pair_id": "ls-govt-level-02",
+  "eval_side": "right",
+  "eval_expected_code": "GOVT_LEVEL"
+}

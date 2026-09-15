@@ -1,0 +1,35 @@
+{
+  "text": "Congress refuses to even hold a vote on the assault weapons ban. All they had to do was schedule it. They work for us.",
+  "in_scope": true,
+  "topic": "guns",
+  "gaps": [
+    {
+      "code": "VOTE_TYPE",
+      "phrase": "refuses to even hold a vote",
+      "how_this_generally_works": "Congress schedules and votes on legislation",
+      "confidence": "medium",
+      "coerced": false,
+      "consensus_note": ""
+    }
+  ],
+  "platform": "eval",
+  "observed_date": "2026-09-05",
+  "thread_id": "",
+  "position": 0,
+  "role": "standalone",
+  "runs": 1,
+  "lints": {
+    "citations_redacted": 0,
+    "deficiency_redacted": 0,
+    "author_rewritten": 0,
+    "verdict_flagged": 0,
+    "codes_coerced": 0,
+    "topics_coerced": 0
+  },
+  "error": "",
+  "tool": "levelset/0.4.0",
+  "taxonomy": "gaps/1.0.0",
+  "eval_pair_id": "ls-chamber-scope-01",
+  "eval_side": "left",
+  "eval_expected_code": "CHAMBER_SCOPE"
+}

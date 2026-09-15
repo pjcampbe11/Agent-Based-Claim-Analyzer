@@ -1,0 +1,35 @@
+{
+  "text": "Groceries were cheap when she took office and now they are not. She did this in her first week and we are all still paying for it.",
+  "in_scope": true,
+  "topic": "economy",
+  "gaps": [
+    {
+      "code": "VOTE_TYPE",
+      "phrase": "did this in her first week",
+      "how_this_generally_works": "The phrase assumes a specific vote (likely a budget or spending vote) was taken in the first week, which is not how government processes work.",
+      "confidence": "high",
+      "coerced": false,
+      "consensus_note": ""
+    }
+  ],
+  "platform": "eval",
+  "observed_date": "2026-09-05",
+  "thread_id": "",
+  "position": 0,
+  "role": "standalone",
+  "runs": 1,
+  "lints": {
+    "citations_redacted": 0,
+    "deficiency_redacted": 0,
+    "author_rewritten": 0,
+    "verdict_flagged": 0,
+    "codes_coerced": 0,
+    "topics_coerced": 0
+  },
+  "error": "",
+  "tool": "levelset/0.4.0",
+  "taxonomy": "gaps/1.0.0",
+  "eval_pair_id": "ls-timing-01",
+  "eval_side": "right",
+  "eval_expected_code": "TIMING"
+}

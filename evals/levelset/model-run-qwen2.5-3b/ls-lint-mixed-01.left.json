@@ -1,0 +1,35 @@
+{
+  "text": "The poster linked https://example.gov/rule-9 and 40 CFR 60.5 but does not realize a proposed rule is not yet in effect.",
+  "in_scope": true,
+  "topic": "environment",
+  "gaps": [
+    {
+      "code": "RULEMAKING",
+      "phrase": "[citation removed: this tool does not verify sources]",
+      "how_this_generally_works": "A proposed rule is submitted to the EPA for review and comment. If approved, it becomes a final rule and is effective after a public comment period.",
+      "confidence": "low",
+      "coerced": false,
+      "consensus_note": ""
+    }
+  ],
+  "platform": "eval",
+  "observed_date": "2026-09-05",
+  "thread_id": "",
+  "position": 0,
+  "role": "standalone",
+  "runs": 1,
+  "lints": {
+    "citations_redacted": 1,
+    "deficiency_redacted": 0,
+    "author_rewritten": 0,
+    "verdict_flagged": 0,
+    "codes_coerced": 0,
+    "topics_coerced": 0
+  },
+  "error": "",
+  "tool": "levelset/0.4.0",
+  "taxonomy": "gaps/1.0.0",
+  "eval_pair_id": "ls-lint-mixed-01",
+  "eval_side": "left",
+  "eval_expected_code": "RULEMAKING"
+}

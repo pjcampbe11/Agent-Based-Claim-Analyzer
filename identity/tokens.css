@@ -1,0 +1,38 @@
+/* abCA identity tokens. Generated -- edit tokens.json and regenerate.
+ *
+ * Contrast ratios for every pairing are recorded in tokens.json and
+ * checked by scripts/check_contrast.py. Two pairings FAIL on purpose and
+ * are kept in the file so nobody rediscovers them the hard way:
+ * brass on parchment (2.14:1) and brass on verdigris (2.50:1). Brass is a
+ * rule-and-ornament color on light grounds. For gold TEXT use brass-deep.
+ */
+:root {
+  --abca-verdigris: #0E6E6E;
+  --abca-graphite: #1B2A2E;
+  --abca-brass: #C9A227;
+  --abca-parchment: #F4F1EA;
+
+  --abca-verdigris-deep: #0B5555;
+  --abca-verdigris-pale: #149E9E;
+  --abca-graphite-soft: #2E474E;
+  --abca-brass-deep: #856B1A;
+  --abca-parchment-warm: #EEE9DE;
+  --abca-white: #FFFFFF;
+
+  /* Semantic aliases. Reach for these in product code, not the raw hues,
+     so a palette revision is one edit rather than a search-and-replace. */
+  --abca-ground: var(--abca-parchment);
+  --abca-ink: var(--abca-graphite);
+  --abca-primary: var(--abca-verdigris);
+  --abca-primary-hover: var(--abca-verdigris-deep);
+  --abca-accent: var(--abca-brass);
+  --abca-accent-text: var(--abca-brass-deep);
+}
+
+/* Reversed ground. Same tokens, roles swapped -- never new hues. */
+[data-abca-theme="dark"] {
+  --abca-ground: var(--abca-graphite);
+  --abca-ink: var(--abca-parchment);
+  --abca-primary: var(--abca-verdigris-pale);
+  --abca-accent-text: var(--abca-brass);
+}
