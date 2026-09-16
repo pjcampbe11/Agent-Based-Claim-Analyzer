@@ -5,7 +5,7 @@
 `Works with local & frontier models`
 `[Model roles: classifier | adjudicator | backtranslate | embedder]`
 
-`abCA takes a political statement, claim, argument or belief and, when it arrives with a source, runs Path A: fetch the source, adjudicate each claim against it, and publish the verdict with a run hash. When no source is attached, Path B runs instead: dissect the claim, locate a candidate source, and — if one is found — route back through Path A.`
+`abCA takes a political statement, claim, argument or belief. When it arrives with a source, it runs Path A: fetch the source, adjudicate each claim against it, and publish the verdict with a run hash. When no source is attached, Path B runs instead: dissect the claim, locate a candidate source, and—if one is found—route back through Path A.`
 
 [![tests](https://img.shields.io/badge/tests-1283%20passing-brightgreen)](#running-the-tests)
 [![coverage](https://img.shields.io/badge/coverage-84%25-brightgreen)](#running-the-tests)
